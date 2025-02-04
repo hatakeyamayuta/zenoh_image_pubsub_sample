@@ -16,3 +16,6 @@ target_link_libraries(pub_image zenohcxx::zenohc ${OpenCV_LIBS})
 add_executable(sub_image src/sub_image.cpp)
 target_link_libraries(sub_image zenohcxx::zenohc ${OpenCV_LIBS})
 
+
+add_executable(pub_shm_image src/pub_shm_image.cpp)
+target_link_libraries(pub_shm_image zenohc zenohcxx::zenohc ${OpenCV_LIBS})

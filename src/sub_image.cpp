@@ -1,5 +1,6 @@
 #include <iostream>
 #include <opencv2/opencv.hpp>
+#include <thread>
 #include "zenoh.hxx"
 using namespace zenoh;
 
@@ -22,9 +23,9 @@ int main(int argc, char **argv)
     auto session = Session::open(std::move(config));
     std::string key = "image";
     auto subscriber = session.declare_subscriber(KeyExpr(key.c_str()), &listener, closures::none);
-    while (1)
+    while (true)
     {
-        continue;
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
     }
     return 0;
 }

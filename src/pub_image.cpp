@@ -13,15 +13,21 @@ int main()
     cv::Mat image;
     std::vector<uint8_t> buf;
     cv::VideoCapture cap(0);
-    while (1)
+
+    cap.set(cv::CAP_PROP_FRAME_WIDTH, 640);
+    cap.set(cv::CAP_PROP_FRAME_HEIGHT, 480);
+    cap.set(cv::CAP_PROP_FPS, 15);
+
+    while (true)
     {
-        auto ret = cap.read(image);
-        if (!ret)
+        if (!cap.read(image))
         {
             continue;
         }
+
         cv::imencode(".jpg", image, buf);
-        publisher.put(buf);
+        publisher.put(std::move(buf));
+        buf.clear();
     }
     return 0;
 }
